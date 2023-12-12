@@ -6,6 +6,8 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import QrcodeVue from 'qrcode.vue'
+
 
 defineProps({
     canResetPassword: {
@@ -14,6 +16,9 @@ defineProps({
     status: {
         type: String,
     },
+    qrcode_value: {
+        type: String
+    }
 });
 
 const form = useForm({
@@ -77,6 +82,12 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
+                <div class="me-auto">
+                    <label class="flex items-center mb-2">
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Login Using QrCode</span>
+                    </label>
+                    <qrcode-vue :value="qrcode_value" size="128" level="H" margin="1"></qrcode-vue>
+                </div>
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
