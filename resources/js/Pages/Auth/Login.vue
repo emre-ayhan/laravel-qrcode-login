@@ -83,10 +83,24 @@ const submit = () => {
 
             <div class="flex items-start justify-end mt-4">
                 <div class="me-auto">
-                    <label class="flex items-center mb-2">
+                    <label class="flex items-center">
                         <span class="text-sm text-gray-600 dark:text-gray-400">Login Using QrCode</span>
                     </label>
-                    <qrcode-vue :value="qrcode_value" size="128" level="H" margin="1"></qrcode-vue>
+                    <qrcode-vue class="my-3" :value="qrcode_value" size="128" level="H" margin="1"></qrcode-vue>
+                    <div>
+                        <Link
+                            v-if="canResetPassword"
+                            :href="route('login')"
+                            preserve-state
+                            class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise inline" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                            </svg>
+                            Reload
+                        </Link>
+                    </div>
                 </div>
                 <div>
                     <div class="mb-4">
