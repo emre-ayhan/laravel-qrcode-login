@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
@@ -10,7 +10,7 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 import QrcodeVue from 'qrcode.vue'
 
 
-defineProps({
+const props = defineProps({
     canResetPassword: {
         type: Boolean,
     },
@@ -25,6 +25,7 @@ defineProps({
 const showQrCode = ref(false)
 
 const form = useForm({
+    user_id: null,
     email: '',
     password: '',
     remember: false,
@@ -35,6 +36,15 @@ const submit = () => {
         onFinish: () => form.reset('password'),
     });
 };
+
+onMounted(() => {
+    window.Echo.channel('login-via-qrcode').listen('QrcodeScannerEvent', event => {
+        if (props.qrcode_value == event.value) {
+            form.user_id = event.user_id;
+            submit();
+        }
+    })
+})
 </script>
 
 <template>
