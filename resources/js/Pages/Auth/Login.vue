@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
@@ -44,6 +44,10 @@ onMounted(() => {
             submit();
         }
     })
+})
+
+onUnmounted(() => {
+    window.Echo.leave('login-via-qrcode');
 })
 </script>
 
