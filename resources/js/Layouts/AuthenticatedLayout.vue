@@ -6,8 +6,12 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import PrimaryButton from '../Components/PrimaryButton.vue';
+import QrcodeScanner from '../Components/QrcodeScanner.vue'
 
 const showingNavigationDropdown = ref(false);
+
+const scanQrcode = ref(false);
 </script>
 
 <template>
@@ -146,6 +150,14 @@ const showingNavigationDropdown = ref(false);
             <!-- Page Content -->
             <main>
                 <slot />
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white dark:bg-gray-800 p-6 overflow-hidden shadow-sm sm:rounded-lg">
+                        <primary-button class="mb-4" @click="scanQrcode = !scanQrcode">
+                            Qrcode Scanner
+                        </primary-button>
+                        <QrcodeScanner v-if="scanQrcode" />
+                    </div>
+                </div>
             </main>
         </div>
     </div>
