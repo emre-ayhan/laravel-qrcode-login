@@ -18,16 +18,22 @@ const authenticate = (qrcode_value) => {
 
 </script>
 <style scoped>
-.qr-code-reader::after {
-    content: '';
-    display: block;
+.qr-code-scanner-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+}
+.qr-code-scanner {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 256px;
-    height: 256px;
-    border: 4px solid #770000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+svg.qr-code-overlay {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 </style>
 <template>
@@ -42,6 +48,30 @@ const authenticate = (qrcode_value) => {
                 <path d="M12 9h2V8h-2z"/>
             </svg>
         </primary-button>
-        <QrcodeStream :class="{ 'qr-code-reader': isCameraOn }" @detect="authenticate" @camera-on="isCameraOn = true" @camera-off="isCameraOn = false" v-else />
+        <div class="qr-code-scanner-wrapper" v-else>
+            <div class="qr-code-scanner" >
+                <QrcodeStream @detect="authenticate" @camera-on="isCameraOn = true" @camera-off="isCameraOn = false">
+                    <svg
+                        v-if="isCameraOn"
+                        class="qr-code-overlay"
+                        viewBox="0 0 100 100"
+                        version="1.1"
+                        id="svg1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:svg="http://www.w3.org/2000/svg">
+                        <defs
+                            id="defs1" />
+                        <g
+                            id="layer1"
+                            transform="matrix(0.73818897,0,0,0.73818897,-16.63475,-39.437484)">
+                            <path
+                            id="rect1"
+                            style="opacity:0.32;stroke-width:0.24953"
+                            d="M 22.534542,53.424646 V 188.89131 H 158.00121 V 53.424646 Z M 56.401208,87.291313 H 124.13454 V 155.02465 H 56.401208 Z" />
+                        </g>
+                    </svg>
+                </QrcodeStream>
+            </div>
+        </div>
     </div>
 </template>
