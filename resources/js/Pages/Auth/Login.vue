@@ -86,7 +86,7 @@ const submit = () => {
                     <label class="flex items-center">
                         <span class="text-sm text-gray-600 dark:text-gray-400">Login Using QrCode</span>
                     </label>
-                    <qrcode-vue class="my-3" :value="qrcode_value" size="128" level="H" margin="1"></qrcode-vue>
+                    <qrcode-vue class="my-3" :value="qrcode_value" :size="128" level="H" :margin="1" render-as="svg"></qrcode-vue>
                     <div>
                         <Link
                             v-if="canResetPassword"

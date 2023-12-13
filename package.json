@@ -18,7 +18,7 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
-        "html5-qrcode": "^2.3.8",
-        "qrcode.vue": "^3.4.1"
+        "qrcode.vue": "^3.4.1",
+        "vue-qrcode-reader": "^5.4.1"
     }
 }
